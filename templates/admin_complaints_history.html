@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block body%}
+    <!-- Navigation Bar (You can include your existing navigation bar here) -->
+    <!-- ... (Navigation code) ... -->
+
+    <!-- Complaints History Table -->
+    <div class="container mt-4">
+        <h3 class="mb-4">Complaints History</h3>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Complaint ID</th>
+                        <th>User ID</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Submission Date</th>
+                        <th>Room Number</th>
+                        <th>Email ID</th>
+                        <th>Feedback</th>
+                        <th>Status</th>
+                        <!-- Add more columns as needed -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for complaint in all_complaints %}
+                    <tr>
+                        <td>{{ complaint.id }}</td>
+                        <td>{{ complaint.user_id }}</td>
+                        <td>{{ complaint.category }}</td>
+                        <td>{{ complaint.description }}</td>
+                        <td>{{ complaint.submission_date }}</td>
+                        <td>{{ complaint.room_number }}</td>
+                        <td>{{ complaint.email_id }}</td>
+                        <td>{{ complaint.feedback }}</td>
+                        <td>
+                            {% if complaint.status == 'Pending' %}
+                            <span class="badge badge-warning">{{ complaint.status }}</span>
+                            {% elif complaint.status == 'In Progress' %}
+                            <span class="badge badge-primary">{{ complaint.status }}</span>
+                            {% elif complaint.status == 'Resolved' %}
+                            <span class="badge badge-success">{{ complaint.status }}</span>
+                            {% endif %}
+                        </td>
+                        <!-- Add more columns and complaint details here -->
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

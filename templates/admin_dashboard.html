@@ -1,0 +1,105 @@
+{% extends "layout.html" %}
+{% block body%}
+     <!-- Content Section 
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-3">
+                 Sidebar (Navigation Menu) 
+                <div class="sidebar">
+                    <h5>Navigation</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Complaints</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Users</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Profile</a>
+                        </li>
+                    </ul>
+                </div>
+            </div> -->
+            <div class="col-md-9">
+                <!-- Main Content Area -->
+                <div class="content">
+                    <!-- Complaints Table -->
+                    <h3>Recent Pending Complaints</h3>
+                    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="alert alert-success">
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    {% endwith %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ComplaintID</th>
+                                <th>UserId</th>
+                                <th>Category</th>
+                                <th>Description</th>
+                                <th>submission_date</th>
+                                <th>room_number</th>
+                                <th>feedback</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for complaint in pending_complaints %}
+                            <tr>
+                                <td>{{ complaint.id }}</td>
+                                <td>{{ complaint.user_id }}</td>
+                                <td>{{ complaint.category }}</td>
+                                <td>{{ complaint.description }}</td>
+                                <td>{{ complaint.submission_date }}</td>
+                                <td>{{ complaint.room_number }}</td>
+                                <td>{{ complaint.feedback}}</td>
+                                <td>
+                                    <div class="d-flex">
+                                        <a href="{{ url_for('view_complaint', complaint_id=complaint.id) }}" class="btn btn-primary mr-2">View</a>
+                                    <!-- In your admin_complaints.html template, add a button to trigger the confirmation -->
+<a href="#" class="btn btn-success" data-toggle="modal" data-target="#resolveConfirmationModal{{ complaint.id }}">Resolve</a>
+
+<!-- Add a modal for confirmation -->
+<div class="modal fade" id="resolveConfirmationModal{{ complaint.id }}" tabindex="-1" role="dialog" aria-labelledby="resolveConfirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="resolveConfirmationModalLabel">Confirm Resolution</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to mark this complaint as resolved?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <a href="{{ url_for('resolve_complaint', complaint_id=complaint.id) }}" class="btn btn-success">Yes, Resolve</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+</td>
+                                
+</tr>
+                            {% endfor %}
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

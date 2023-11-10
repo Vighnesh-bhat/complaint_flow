@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block body %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-4">
+                <!-- Admin Profile Information -->
+                <div class="card">
+                    <div class="card-header">
+                        Admin Profile
+                    </div>
+                    <div class="card-body text-center">
+                        <!-- Admin Profile Picture -->
+                        <img src="{{ url_for('static', filename='admin_profile.jpg') }}" alt="Admin Image" class="img-fluid rounded-circle profile-image">
+                        <!-- Admin Information -->
+                        <h5 class="mt-3">{{ admin.name }}</h5>
+                        <p>Email: {{ admin.email }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <!-- Admin Profile Actions -->
+                <div class="card">
+                    <div class="card-header">
+                        Admin Profile Actions
+                    </div>
+                    <div class="card-body">
+                        <!-- Add links or buttons for Edit Profile, Change Password, and Logout -->
+                        <a href="/edit_admin_profile" class="btn btn-primary">Edit Profile</a>
+                        <a href="/change_admin_password" class="btn btn-primary">Change Password</a>
+                        <a href="/admin_logout" class="btn btn-danger">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

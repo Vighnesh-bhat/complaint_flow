@@ -1,0 +1,36 @@
+{% extends "layout2.html" %}
+{% block body %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-4">
+                <!-- User Profile Information -->
+                <div class="card">
+                    <div class="card-header">
+                        Profile
+                    </div>
+                    <div class="card-body text-center">
+                        <!-- User Profile Picture -->
+                        <img src="{{ url_for('static', filename='profile.jpg') }}" alt="User Image" class="img-fluid rounded-circle profile-image">
+                        <!-- User Information -->
+                        <h5 class="mt-3">{{ user.name }}</h5>
+                        <p>Email: {{ user.email }}</p>
+                        <p>Room Number: {{ current_user.roomno }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <!-- User Profile Actions -->
+                <div class="card">
+                    <div class="card-header">
+                        Profile Actions
+                    </div>
+                    <div class="card-body">
+                        <a href="/edit_user_profile" class="btn btn-primary">Edit Profile</a>
+                        <a href="/edit_user_password" class="btn btn-primary">Change Password</a>
+                        <a href="/user_logout" class="btn btn-danger">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

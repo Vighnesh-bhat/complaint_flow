@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="container mt-4">
+    <h2>User Complaints</h2>
+    <p>User: {{ user.name }}</p>
+
+    {% if complaints %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Complaint ID</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Submission Date</th>
+                <!-- Add more table headers as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for complaint in complaints %}
+            <tr>
+                <td>{{ complaint.id }}</td>
+                <td>{{ complaint.category }}</td>
+                <td>{{ complaint.description }}</td>
+                <td>{{ complaint.submission_date }}</td>
+                <!-- Add more table cells as needed -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No complaints found for this user.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block body %}
+    <div class="container mt-4">
+        <h3 class="mb-4">Complaint Details</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        Complaint Information
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ complaint.category }}</h5>
+                        <p class="card-text">{{ complaint.description }}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>ID:</strong> {{ complaint.id }}</li>
+                        <li class="list-group-item"><strong>Status:</strong> {{ complaint.status }}</li>
+                        <li class="list-group-item"><strong>Submission Date:</strong> {{ complaint.submission_date.strftime('%B %d, %Y %I:%M %p') }}</li>
+                        <li class="list-group-item"><strong>Received from:</strong> {{ complaint.user_id }}</li>
+                        <li class="list-group-item"><strong>Room Number:</strong> {{ complaint.room_number }}</li>
+                        <li class="list-group-item"><strong>Email:</strong> {{ complaint.email_id }}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        Feedback
+                    </div>
+                    <div class="card-body">
+                        {% if complaint.feedback %}
+                            <p class="card-text">{{ complaint.feedback }}</p>
+                        {% else %}
+                            <p class="card-text">No feedback provided.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-primary mt-4">Back to Dashboard</a>
+    </div>
+{% endblock %}

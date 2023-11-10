@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Hostel Complaint System</title>
+    <!-- Add Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('/static/nie.jpg'); /* Add your background image URL here */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .container {
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #ff3300; /* Change the text color */
+        }
+
+        p {
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: #ffffff; /* Change the text color */
+        }
+
+        .btn {
+            font-size: 20px;
+            padding: 10px 30px;
+            margin-top: 20px;
+            border-radius: 30px;
+        }
+
+        .btn-primary {
+            background-color: #007BFF;
+            border: none;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border: none;
+        }
+
+        .btn-primary:hover,
+        .btn-success:hover {
+            background-color: #0056b3;
+            transition: background-color 0.3s ease-in-out;
+        }
+    </style>
+
+    <script>
+        // Disable the back button on the landing page
+        history.pushState(null, null, location.href);
+        window.onpopstate = function () {
+            history.go(1);
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Hostel Complaint System</h1>
+        <p>Please select your role:</p>
+        <div class="row">
+            <div class="col-md-6">
+                <a href="/admin_login" class="btn btn-primary btn-lg">Admin</a>
+            </div>
+            <div class="col-md-6">
+                <a href="/user_login" class="btn btn-success btn-lg">User</a>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

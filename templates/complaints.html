@@ -1,0 +1,46 @@
+
+
+    {% extends "layout2.html" %}
+    {% block body%}
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+    <div class=test>
+    <div class="container2">
+        <h2 class="section-heading">Your Complaints</h2>
+    <div class="complaints-table">
+        
+        {% if user_complaints %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Complaint ID</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for complaint in user_complaints %}
+                    <tr>
+                        <td>{{ complaint.id }}</td>
+                        <td>{{ complaint.category }}</td>
+                        <td>{{ complaint.description }}</td>
+                        <td>{{ complaint.status }}</td>
+                        <td>
+                            {% if complaint.feedback is none %}
+                            <a href="{{ url_for('provide_feedback', complaint_id=complaint.id) }}">Provide Feedback</a>
+                            {% else %}
+                            Feedback Submitted
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="no-complaints-message">You have no complaints to display.</p>
+        {% endif %}
+    </div>
+</div>
+</div>
+{% endblock%}

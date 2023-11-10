@@ -1,0 +1,93 @@
+
+{% extends "layout2.html" %}
+{% block body%}
+    <!-- Profile Section -->
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        Profile
+                    </div>
+                    <div class="card-body text-center">
+                        <img src="/static/profile.jpg" alt="User Image" class="img-fluid rounded-circle profile-image">
+                        <h5 class="mt-3">{{ current_user.name }}</h5>
+                        <p>Email: {{ current_user.email }}</p>
+                        <p>Room Number: {{ current_user.roomno }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <h3>Register a Complaint</h3>
+                    <form method="POST"action="/user_dashboard">
+                         <!-- Flash messages section -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="alert alert-success">
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    {% endwith %}
+    <!-- End of flash messages section -->
+                        <div class="form-group">
+                            <label for="complaint_category">Select Complaint Category:</label>
+                            <select id="complaint_category" name="complaint_category" class="form-control" required>
+                                <option value="electricity">Electricity</option>
+                                <option value="cleaning">Cleaning/Housekeeping</option>
+                                <option value="plumbing">Plumbing</option>
+                                <option value="food">Food-Related</option>
+                                <option value="carpentry">Carpentry</option>
+                                <!-- Add more complaint categories if needed -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="complaint_description">Complaint Description:</label>
+                            <textarea id="complaint_description" name="complaint_description" class="form-control" rows="4" required></textarea>
+                        </div>
+                        <input type="hidden" id="complaint_datetime" name="complaint_datetime">
+                        <button type="submit" class="btn btn-primary">Submit Complaint</button>
+                    </form>
+                </div>
+            </div>
+
+            <script>
+                // Function to get the current date and time in a readable format
+                function getCurrentDateTime() {
+                    const now = new Date();
+                    const options = {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit'
+                    };
+                    return now.toLocaleDateString('en-US', options);
+                }
+            
+                // Add the current date and time to a hidden input field when the form is submitted
+                document.addEventListener('DOMContentLoaded', () => {
+                    const complaintForm = document.getElementById('complaint-form');
+                    const dateTimeField = document.getElementById('complaint_datetime');
+            
+                    if (complaintForm && dateTimeField) {
+                        complaintForm.addEventListener('submit', () => {
+                            dateTimeField.value = getCurrentDateTime();
+                        });
+                    }
+                });
+            </script>
+
+            <script>
+                // Function to clear the complaint form fields
+                function clearComplaintForm() {
+                    document.getElementById("complaint_category").value = "";
+                    document.getElementById("complaint_description").value = "";
+                }
+           </script>
+{% endblock %}
