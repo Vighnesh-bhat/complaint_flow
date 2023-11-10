@@ -10,6 +10,8 @@ import re
 app = Flask(__name__)
 app.secret_key = 'xyzsdfg'
 
+#hi
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/user-system'
 db = SQLAlchemy(app)
 
@@ -139,7 +141,6 @@ def admin_register():
         db.session.commit()
         return redirect(url_for('admin_login'))
     return render_template('admin_register.html')  
-
 
 
 @app.route('/admin_dashboard')
